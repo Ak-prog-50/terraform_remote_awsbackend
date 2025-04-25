@@ -31,7 +31,7 @@ First, we need to create the S3 bucket and DynamoDB table that will store our st
 cd remote-backend
 ```
 
-1. Replace variable names in `variables.tf` with your own values.
+1. Replace variable names in `terraform.tfvars` with your own values.
 2. **Make sure** remote backend configuration in `main.tf` is commented out.
 
 ```bash
@@ -48,7 +48,7 @@ terraform apply
   backend "s3" {
     bucket         = "REPLACE WITH YOUR BUCKET NAME" # REPLACE WITH YOUR BUCKET NAME
     key            = "YOUR_PROJECT_NAME/bootstrap-remotebackend/terraform.tfstate"
-    region         = "AWS_REGION_IN_VARIABLES.TF"
+    region         = "AWS_REGION_IN_terraform.tfvars"
     dynamodb_table = "REPLACE WITH YOUR TABLE NAME" # REPLACE WITH YOUR TABLE NAME
     encrypt        = true
   }
