@@ -31,7 +31,7 @@ cd remote-backend
 ```
 
 1. Replace variable names in `variables.tf` with your own values.
-2. Make sure remote backend configuration in `main.tf` is commented out.
+2. **Make sure** remote backend configuration in `main.tf` is commented out.
 
 ```bash
 # Initialize Terraform (this will use local state initially)
@@ -90,7 +90,8 @@ terraform apply
 
 # Comment out the remote backend configuration in main.tf
 # Re-initialize Terraform to use local state. ( Otherwise, s3 bucket and ddb will get deleted, but you will get an errored.tf file. )
-terraform init 
+terraform init -migrate-state
+# When prompted, make sure to prompt "yes" only. This will copy s3 state file back to local .tfstate file.
 
 # Destroy the remote backend infrastructure
 terraform destroy

@@ -5,10 +5,10 @@ terraform {
   ## TO SWITCH FROM LOCAL BACKEND TO REMOTE AWS BACKEND
   #############################################################
   # backend "s3" {
-  #   bucket         = "REPLACE WITH YOUR BUCKET NAME" # REPLACE WITH YOUR BUCKET NAME
-  #   key            = "YOUR_PROJECT_NAME/bootstrap-remotebackend/terraform.tfstate"
+  #   bucket         = "PROJECT_NAME-tf-state" # REPLACE WITH YOUR BUCKET NAME
+  #   key            = "PROJECT_NAME/bootstrap-remotebackend/terraform.tfstate"
   #   region         = "AWS_REGION_IN_VARIABLES.TF"
-  #   dynamodb_table = "REPLACE WITH YOUR TABLE NAME" # REPLACE WITH YOUR TABLE NAME
+  #   dynamodb_table = "PROJECT_NAME-tf-state-locking" # REPLACE WITH YOUR TABLE NAME
   #   encrypt        = true
   # }
 
