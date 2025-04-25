@@ -9,6 +9,7 @@ A.Kal ( [@ak-prog-50](https://github.com/ak-prog-50) )
 ## Overview
 
 The remote backend configuration in this project:
+
 - Uses an S3 bucket to store Terraform state files
 - Uses DynamoDB for state locking to prevent concurrent operations
 - Enables versioning on the S3 bucket for state history
@@ -65,6 +66,7 @@ rm terraform.tfstate
 ```
 
 ### 2. Verify the Remote Backend
+
 After the migration, you can verify that the remote backend is working correctly by running:
 
 ```bash
@@ -74,19 +76,29 @@ terraform state list
 
 ### 3. Using the Remote Backend
 
-Copy paste the terraform backend block to your own terraform project.
+1. Copy paste the terraform backend block to your own terraform project.
+2. Replace the text 'bootstrap-remotebackend' in the backend block's s3 key to your 'app_infra'.
+
+```hcl
+  backend "s3" {
+    key = "PROJECT_NAME/app_infra/terraform.tfstate"
+    # The rest of the backend block remains unchanged
+  }
+  ---
+```
 
 ### 4. Clean Up
 
 To clean up the resources created for the remote backend, follow these steps:
 
 1. **Check Resource Protection Settings**:
-  - **S3 Bucket**:
-    - If `force_destroy` is set to `false`, you need to manually delete all objects in the bucket before proceeding.
-  - **DynamoDB Table**:
-    - If `prevent_destroy` is set to `true`, remove the `lifecycle` block from the resource definition.
-  - **Deletion Protection**:
-    - If `deletion_protection_enabled` is set to `true`, disable this setting either via Terraform main.tf or the AWS Console.
+
+- **S3 Bucket**:
+  - If `force_destroy` is set to `false`, you need to manually delete all objects in the bucket before proceeding.
+- **DynamoDB Table**:
+  - If `prevent_destroy` is set to `true`, remove the `lifecycle` block from the resource definition.
+- **Deletion Protection**:
+  - If `deletion_protection_enabled` is set to `true`, disable this setting either via Terraform main.tf or the AWS Console.
 
 ```bash
 # ( Optional) Run terraform apply if `force_destroy`, `prevent_destroy` or `deletion_protection_enabled` got changed
@@ -100,5 +112,3 @@ terraform init -migrate-state
 # Destroy the remote backend infrastructure
 terraform destroy
 ```
-
-
