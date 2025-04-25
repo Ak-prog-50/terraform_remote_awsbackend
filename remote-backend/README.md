@@ -73,13 +73,19 @@ terraform state list
 ```
 
 ### 3. Clean Up
-To clean up the resources created for the remote backend, first check,
- `force_destroy` setting of s3 bucket and `prevent_destroy` terraform lifecycle rule of s3 and dynamodb.
-If `force_destroy` is set to false, you need to manually delete the objects in the bucket before destroying the infrastructure.
-If `prevent_destroy` is set to true, you need to remove the lifecycle block from the resource before destroying. 
+
+To clean up the resources created for the remote backend, follow these steps:
+
+1. **Check Resource Protection Settings**:
+  - **S3 Bucket**:
+    - If `force_destroy` is set to `false`, you need to manually delete all objects in the bucket before proceeding.
+  - **DynamoDB Table**:
+    - If `prevent_destroy` is set to `true`, remove the `lifecycle` block from the resource definition.
+  - **Deletion Protection**:
+    - If `deletion_protection_enabled` is set to `true`, disable this setting either via Terraform main.tf or the AWS Console.
 
 ```bash
-# ( Optional) Run terraform apply if `force_destroy` or `prevent_destroy` got changed
+# ( Optional) Run terraform apply if `force_destroy`, `prevent_destroy` or `deletion_protection_enabled` got changed
 terraform apply
 
 # Comment out the remote backend configuration in main.tf
