@@ -1,6 +1,6 @@
 # Terraform Remote Backend Setup
 
-This 
+This is a by default deletion protected AWS remote backend setup for terraform.
 
 ### Author
 
