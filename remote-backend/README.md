@@ -72,7 +72,11 @@ After the migration, you can verify that the remote backend is working correctly
 terraform state list
 ```
 
-### 3. Clean Up
+### 3. Using the Remote Backend
+
+Copy paste the terraform backend block to your own terraform project.
+
+### 4. Clean Up
 
 To clean up the resources created for the remote backend, follow these steps:
 
