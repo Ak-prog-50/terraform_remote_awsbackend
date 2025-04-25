@@ -57,6 +57,8 @@ resource "aws_dynamodb_table" "terraform_locks" {
     prevent_destroy = true # when true terraform rejects destroy of this resource
   }
 
+  deletion_protection_enabled = true # DDB deletion protection
+
   tags = {
     Project =var.project_name
   }
